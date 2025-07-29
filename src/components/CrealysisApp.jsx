@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import Header from './Header';
 
 const CrealysisApp = () => {
   const [activeFeature, setActiveFeature] = useState(0);
@@ -126,84 +127,11 @@ const CrealysisApp = () => {
     }
   ];
 
+
   return (
     <div className="min-h-screen bg-white text-gray-900 font-sans">
       {/* Header */}
-      <header className="fixed top-0 w-full bg-white border-b border-gray-200 z-50 h-20">
-        <nav className="max-w-7xl mx-auto px-8 flex justify-between items-center h-full">
-          <div className="text-3xl font-semibold text-gray-900 tracking-tight">
-            Crealysis
-          </div>
-
-          <ul className="hidden lg:flex space-x-8">
-            <li>
-              <button
-                onClick={() => scrollToSection('home')}
-                className="text-gray-900 hover:text-blue-600 hover:border-b-2 hover:border-blue-600 pb-3 transition-all duration-200"
-              >
-                Home
-              </button>
-            </li>
-            <li>
-              <button
-                onClick={() => scrollToSection('services')}
-                className="text-gray-900 hover:text-blue-600 hover:border-b-2 hover:border-blue-600 pb-3 transition-all duration-200"
-              >
-                Solutions
-              </button>
-            </li>
-            <li>
-              <button
-                onClick={() => scrollToSection('features')}
-                className="text-gray-900 hover:text-blue-600 hover:border-b-2 hover:border-blue-600 pb-3 transition-all duration-200"
-              >
-                Products
-              </button>
-            </li>
-            <li>
-              <button
-                onClick={() => scrollToSection('about')}
-                className="text-gray-900 hover:text-blue-600 hover:border-b-2 hover:border-blue-600 pb-3 transition-all duration-200"
-              >
-                About
-              </button>
-            </li>
-            <li>
-              <button
-                onClick={() => scrollToSection('contact')}
-                className="text-gray-900 hover:text-blue-600 hover:border-b-2 hover:border-blue-600 pb-3 transition-all duration-200"
-              >
-                Contact
-              </button>
-            </li>
-          </ul>
-
-
-          <ul className="hidden lg:flex space-x-4">
-            <li>
-              <button
-                onClick={() => scrollToSection('contact')}
-                className="bg-blue-600 text-white px-6 py-3 hover:bg-blue-700 transition-colors duration-200 font-medium"
-              >
-                Get started
-              </button>
-            </li>
-            <li>
-              <button
-                // onClick={() => scrollToSection('contact')}
-                className="bg-gray-500 text-white px-6 py-3 hover:bg-gray-600 transition-colors duration-200 font-medium"
-              >
-                Login / Register
-              </button>
-            </li>
-          </ul>
-
-
-
-
-
-        </nav>
-      </header>
+      <Header />
 
       <main>
         {/* Hero Section */}
