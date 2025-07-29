@@ -35,14 +35,14 @@ const CrealysisApp = () => {
     setFormMessage({ text: '', type: '' });
 
     const API_GATEWAY_URL = 'https://npw7j4vea2.execute-api.eu-north-1.amazonaws.com/prod/contact';
-    
+
     let subject = `New inquiry from ${formData.name}`;
     if (formData.company) {
       subject += ` - ${formData.company}`;
     } else {
       subject += ` (No Company)`;
     }
-    
+
     const payload = { ...formData, subject: subject };
 
     try {
@@ -90,7 +90,7 @@ const CrealysisApp = () => {
       description: "SOC 2 Type II compliant with enterprise-grade security controls and data protection standards."
     },
     {
-      title: "Scalable Infrastructure", 
+      title: "Scalable Infrastructure",
       description: "Cloud-native architecture designed to handle enterprise workloads with 99.9% uptime SLA."
     },
     {
@@ -134,10 +134,10 @@ const CrealysisApp = () => {
           <div className="text-3xl font-semibold text-gray-900 tracking-tight">
             Crealysis
           </div>
-          
+
           <ul className="hidden lg:flex space-x-8">
             <li>
-              <button 
+              <button
                 onClick={() => scrollToSection('home')}
                 className="text-gray-900 hover:text-blue-600 hover:border-b-2 hover:border-blue-600 pb-3 transition-all duration-200"
               >
@@ -145,7 +145,7 @@ const CrealysisApp = () => {
               </button>
             </li>
             <li>
-              <button 
+              <button
                 onClick={() => scrollToSection('services')}
                 className="text-gray-900 hover:text-blue-600 hover:border-b-2 hover:border-blue-600 pb-3 transition-all duration-200"
               >
@@ -153,7 +153,7 @@ const CrealysisApp = () => {
               </button>
             </li>
             <li>
-              <button 
+              <button
                 onClick={() => scrollToSection('features')}
                 className="text-gray-900 hover:text-blue-600 hover:border-b-2 hover:border-blue-600 pb-3 transition-all duration-200"
               >
@@ -161,7 +161,7 @@ const CrealysisApp = () => {
               </button>
             </li>
             <li>
-              <button 
+              <button
                 onClick={() => scrollToSection('about')}
                 className="text-gray-900 hover:text-blue-600 hover:border-b-2 hover:border-blue-600 pb-3 transition-all duration-200"
               >
@@ -169,7 +169,7 @@ const CrealysisApp = () => {
               </button>
             </li>
             <li>
-              <button 
+              <button
                 onClick={() => scrollToSection('contact')}
                 className="text-gray-900 hover:text-blue-600 hover:border-b-2 hover:border-blue-600 pb-3 transition-all duration-200"
               >
@@ -177,13 +177,31 @@ const CrealysisApp = () => {
               </button>
             </li>
           </ul>
-          
-          <button 
-            onClick={() => scrollToSection('contact')}
-            className="bg-blue-600 text-white px-6 py-3 hover:bg-blue-700 transition-colors duration-200 font-medium"
-          >
-            Get started
-          </button>
+
+
+          <ul className="hidden lg:flex space-x-4">
+            <li>
+              <button
+                onClick={() => scrollToSection('contact')}
+                className="bg-blue-600 text-white px-6 py-3 hover:bg-blue-700 transition-colors duration-200 font-medium"
+              >
+                Get started
+              </button>
+            </li>
+            <li>
+              <button
+                // onClick={() => scrollToSection('contact')}
+                className="bg-gray-500 text-white px-6 py-3 hover:bg-gray-600 transition-colors duration-200 font-medium"
+              >
+                Login / Register
+              </button>
+            </li>
+          </ul>
+
+
+
+
+
         </nav>
       </header>
 
@@ -199,7 +217,7 @@ const CrealysisApp = () => {
                 <p className="text-xl mb-12 text-gray-600 leading-relaxed max-w-lg">
                   Transform your creative operations with enterprise-grade AI tools designed for scale, security, and performance. From content generation to creative automation, Crealysis delivers measurable business impact.
                 </p>
-                <button 
+                <button
                   onClick={() => scrollToSection('services')}
                   className="bg-blue-600 text-white px-6 py-3 hover:bg-blue-700 transition-colors duration-200 font-medium mb-12"
                 >
@@ -250,7 +268,7 @@ const CrealysisApp = () => {
 
             <div className="grid lg:grid-cols-2 gap-8">
               {services.map((service, index) => (
-                <div 
+                <div
                   key={index}
                   className="bg-white border border-gray-200 p-12 hover:border-blue-600 hover:shadow-lg transition-all duration-200 relative group"
                 >
@@ -276,11 +294,10 @@ const CrealysisApp = () => {
                 </h2>
                 <ul className="space-y-0">
                   {features.map((feature, index) => (
-                    <li 
+                    <li
                       key={index}
-                      className={`py-6 border-b border-gray-200 cursor-pointer transition-all duration-200 ${
-                        activeFeature === index ? 'bg-blue-50 pl-4' : 'hover:bg-blue-50 hover:pl-4'
-                      }`}
+                      className={`py-6 border-b border-gray-200 cursor-pointer transition-all duration-200 ${activeFeature === index ? 'bg-blue-50 pl-4' : 'hover:bg-blue-50 hover:pl-4'
+                        }`}
                       onClick={() => setActiveFeature(index)}
                     >
                       <h3 className="text-xl font-medium text-gray-900 mb-2">{feature.title}</h3>
@@ -422,12 +439,11 @@ const CrealysisApp = () => {
                 </div>
 
                 {formMessage.text && (
-                  <div 
-                    className={`mt-5 p-3 rounded ${
-                      formMessage.type === 'success' 
-                        ? 'bg-green-100 text-green-800' 
-                        : 'bg-red-100 text-red-800'
-                    }`}
+                  <div
+                    className={`mt-5 p-3 rounded ${formMessage.type === 'success'
+                      ? 'bg-green-100 text-green-800'
+                      : 'bg-red-100 text-red-800'
+                      }`}
                   >
                     {formMessage.text}
                   </div>
