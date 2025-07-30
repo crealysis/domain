@@ -142,7 +142,7 @@ const CrealysisApp = () => {
   return (
     <div className="min-h-screen bg-white text-gray-900 font-sans">
       {/* Header */}
-      <Header />
+      
 
       <main>
         {/* Hero Section */}
