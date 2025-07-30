@@ -29,14 +29,15 @@ const CrealysisApp = () => {
     });
   };
 
-
-  const handleSubmit = async (e) => {
+  // --- MODIFIED handleSubmit FUNCTION ---
+  const handleSubmit = (e) => {
     e.preventDefault();
     setIsSubmitting(true);
     setFormMessage({ text: '', type: '' });
 
-    const API_GATEWAY_URL = 'https://npw7j4vea2.execute-api.eu-north-1.amazonaws.com/prod/contact';
+    const recipientEmail = 'crealysislimited@gmail.com';
 
+    // Construct the subject line
     let subject = `New inquiry from ${formData.name}`;
     if (formData.company) {
       subject += ` - ${formData.company}`;
@@ -44,24 +45,36 @@ const CrealysisApp = () => {
       subject += ` (No Company)`;
     }
 
-    const payload = { ...formData, subject: subject };
+    // Construct the email body
+    const body = `
+      Name: ${formData.name}
+      Email: ${formData.email}
+      Company: ${formData.company}
+      Job Title: ${formData.title}
+
+      Message:
+      ${formData.message}
+    `;
+
+    // Encode subject and body for URL
+    const encodedSubject = encodeURIComponent(subject);
+    const encodedBody = encodeURIComponent(body);
+
+    // Create the mailto link
+    const mailtoLink = `mailto:${recipientEmail}?subject=${encodedSubject}&body=${encodedBody}`;
 
     try {
-      const response = await fetch(API_GATEWAY_URL, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(payload)
+      // Open the user's default email client
+      window.location.href = mailtoLink;
+
+      // Provide immediate feedback to the user that the email client is opening
+      setFormMessage({
+        text: 'Your email client is opening with your message. Please click "Send" to complete the inquiry.',
+        type: 'success'
       });
 
-      const result = await response.json();
-
-      if (response.ok) {
-        setFormMessage({
-          text: result.message || 'Thank you! Your message has been sent.',
-          type: 'success'
-        });
+      // Optionally, reset the form after a short delay
+      setTimeout(() => {
         setFormData({
           name: '',
           email: '',
@@ -69,21 +82,19 @@ const CrealysisApp = () => {
           title: '',
           message: ''
         });
-      } else {
-        setFormMessage({
-          text: result.error || 'Oops! Something went wrong. Please try again later.',
-          type: 'error'
-        });
-      }
+        setIsSubmitting(false); // Reset submitting state after opening email client
+      }, 1000); // Give a small delay for the mailto link to process
     } catch (error) {
+      // This catch block might not be very effective for mailto errors
       setFormMessage({
-        text: 'Network error: Could not connect to the server. Please check your internet connection.',
+        text: 'Could not open email client. Please ensure you have one configured.',
         type: 'error'
       });
-    } finally {
       setIsSubmitting(false);
     }
   };
+  // --- END MODIFIED handleSubmit FUNCTION ---
+
 
   const features = [
     {
@@ -285,7 +296,8 @@ const CrealysisApp = () => {
               </div>
 
               <div className="bg-gray-100 p-12 border border-gray-200">
-                <div>
+                {/* Wrap your form inputs and button in a <form> tag */}
+                <form onSubmit={handleSubmit}>
                   <div className="mb-6">
                     <label htmlFor="name" className="block text-sm text-gray-900 mb-2 font-medium">
                       Full name *
@@ -296,6 +308,7 @@ const CrealysisApp = () => {
                       name="name"
                       value={formData.name}
                       onChange={handleInputChange}
+                      required // Added 'required' for basic validation
                       className="w-full p-4 border border-gray-400 bg-white text-gray-900 focus:outline-none focus:border-blue-600 transition-colors duration-200"
                     />
                   </div>
@@ -310,6 +323,7 @@ const CrealysisApp = () => {
                       name="email"
                       value={formData.email}
                       onChange={handleInputChange}
+                      required // Added 'required'
                       className="w-full p-4 border border-gray-400 bg-white text-gray-900 focus:outline-none focus:border-blue-600 transition-colors duration-200"
                     />
                   </div>
@@ -324,6 +338,7 @@ const CrealysisApp = () => {
                       name="company"
                       value={formData.company}
                       onChange={handleInputChange}
+                      required // Added 'required'
                       className="w-full p-4 border border-gray-400 bg-white text-gray-900 focus:outline-none focus:border-blue-600 transition-colors duration-200"
                     />
                   </div>
@@ -353,18 +368,19 @@ const CrealysisApp = () => {
                       onChange={handleInputChange}
                       rows="5"
                       placeholder="Tell us about your creative challenges and objectives..."
+                      required // Added 'required'
                       className="w-full p-4 border border-gray-400 bg-white text-gray-900 focus:outline-none focus:border-blue-600 transition-colors duration-200 resize-y"
                     />
                   </div>
 
                   <button
-                    onClick={handleSubmit}
+                    type="submit" // Changed to type="submit"
                     disabled={isSubmitting}
                     className="bg-blue-600 text-white px-6 py-3 hover:bg-blue-700 transition-colors duration-200 font-medium disabled:opacity-50 disabled:cursor-not-allowed"
                   >
-                    {isSubmitting ? 'Submitting...' : 'Submit inquiry'}
+                    {isSubmitting ? 'Opening email...' : 'Submit inquiry'}
                   </button>
-                </div>
+                </form>
 
                 {formMessage.text && (
                   <div
@@ -376,6 +392,11 @@ const CrealysisApp = () => {
                     {formMessage.text}
                   </div>
                 )}
+
+                {/* Added contact email address below the form */}
+                <div className="mt-8 text-gray-600 text-center">
+                  Prefer to email directly? Reach us at <a href="mailto:crealysislimited@gmail.com" className="text-blue-600 hover:underline">crealysislimited@gmail.com</a>
+                </div>
               </div>
             </div>
           </div>
