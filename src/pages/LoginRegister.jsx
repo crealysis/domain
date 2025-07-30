@@ -1,10 +1,11 @@
 import React from 'react'
 import Header from '../components/Header';
+import Header2 from '../components/Header2';
 
 export default function loginRegister() {
     return (
         <>
-            <Header />
+            <Header2 />
             <div className="min-h-screen bg-gray-100 flex flex-col items-center justify-center p-4">
                 {/* <Header /> Uncomment if you want the header on the login page */}
                 <div className="bg-white p-8 rounded-lg shadow-md w-full max-w-md text-center">

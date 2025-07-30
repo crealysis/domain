@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import Header from './Header';
 
 const CrealysisApp = () => {
   const [activeFeature, setActiveFeature] = useState(0);
