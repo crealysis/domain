@@ -125,12 +125,16 @@ const Header = () => {
       >
         <ul className="flex flex-col items-center py-8 space-y-6">
           <li>
-            <button
-              onClick={() => scrollToSection('home')}
-              className="text-gray-900 text-xl hover:text-blue-600 transition-colors duration-200"
+            <Link
+              to="/"
             >
-              Home
-            </button>
+              <button
+                onClick={() => scrollToSection('home')}
+                className="text-gray-900 text-xl hover:text-blue-600 transition-colors duration-200"
+              >
+                Home
+              </button>
+            </Link>
           </li>
           <li>
             <button
