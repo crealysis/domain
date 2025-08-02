@@ -40,7 +40,7 @@ export default function loginRegister() {
     setMessage('');
 
     // *** Using your specific API endpoint for registration. ***
-    const apiUrl = 'http://localhost:5019/api/register';
+    const apiUrl = 'https://localhost:7122/api/register';
 
     try {
       const response = await fetch(apiUrl, {
@@ -96,7 +96,7 @@ export default function loginRegister() {
     setMessage('');
 
     // *** Using your specific API endpoint for login. ***
-    const apiUrl = 'http://localhost:5019/api/login';
+    const apiUrl = 'https://localhost:7122/api/login';
 
     try {
       const response = await fetch(apiUrl, {
