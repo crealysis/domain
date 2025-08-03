@@ -40,7 +40,8 @@ export default function loginRegister() {
     setMessage('');
 
     // *** Using your specific API endpoint for registration. ***
-    const apiUrl = 'https://localhost:7122/api/register';
+    // const apiUrl = 'https://localhost:7122/api/account/register';
+    const apiUrl = 'http://ec2-35-176-43-122.eu-west-2.compute.amazonaws.com:8080/api/account/register';
 
     try {
       const response = await fetch(apiUrl, {
@@ -96,7 +97,7 @@ export default function loginRegister() {
     setMessage('');
 
     // *** Using your specific API endpoint for login. ***
-    const apiUrl = 'https://localhost:7122/api/login';
+    const apiUrl = 'http://ec2-35-176-43-122.eu-west-2.compute.amazonaws.com:8080/api/login';
 
     try {
       const response = await fetch(apiUrl, {
